@@ -7,11 +7,15 @@ export default new Vuex.Store({
   state: {
     user: {
       nickname: ''
+    },
+    currentSong: {
+      artist: 'Michael Jackson',
+      title: 'Thriller',
+      album: 'Thriller'
     }
   },
   mutations: {
     setNick(state, nickname) {
-      console.log('set nickname');
       state.user = {nickname};
     }
   },
