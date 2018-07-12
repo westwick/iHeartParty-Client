@@ -1,21 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
+import Start from './views/Start.vue'
+import Main from './views/Main.vue'
+import Joiner from './views/Joiner.vue'
+import { requireNick } from './services/auth';
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/start',
+      name: 'start',
+      component: Start
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
-    }
+      path: '/join',
+      name: 'joiner',
+      component: Joiner,
+      beforeEnter: requireNick 
+    },
+    {
+      path: '/',
+      name: 'main',
+      component: Main,
+      beforeEnter: requireNick 
+    },
   ]
 })
