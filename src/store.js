@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    searching: false,
+    showSearchResults: false,
+    searchDirty: false,
+    searchResults: [],
     user: {
       nickname: ''
     },
@@ -22,6 +26,25 @@ export default new Vuex.Store({
   mutations: {
     setNick(state, nickname) {
       state.user = {nickname};
+    },
+    startSearch(state) {
+      state.searching = true;
+      state.showSearchResults = true;
+      state.searchResults = [];
+    },
+    endSearch(state, results) {
+      state.searching = false;
+      state.searchResults = results;
+    },
+    openSearch(state) {
+      state.showSearchResults = true;
+    },
+    closeSearch(state) {
+      state.showSearchResults = false;
+      state.searchResults = [];
+    },
+    searchDirty(state, dirty) {
+      state.searchDirty = dirty;
     }
   },
   actions: {

@@ -13,11 +13,6 @@ import { setNick } from '../services/auth';
 
 export default {
   name: 'start',
-  data() {
-    return {
-      nickname: ''
-    }
-  },
   methods: {
     login() {
       setNick(this.nickname)
