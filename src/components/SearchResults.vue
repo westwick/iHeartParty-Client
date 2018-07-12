@@ -61,6 +61,11 @@ export default {
 .search-result {
   border-bottom: 1px solid #eee;
   padding: 8px 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
 
   .search-img {
     width: 40px;

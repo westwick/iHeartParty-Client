@@ -38,7 +38,7 @@ export default {
 
 .next-track {
   border-bottom: 1px solid #eee;
-  padding: 8px 80px 8px 0;
+  padding: 8px 64px 8px 0;
   position: relative;
 }
 
