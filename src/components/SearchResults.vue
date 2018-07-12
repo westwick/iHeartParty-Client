@@ -4,7 +4,7 @@
     <i class="far fa-times-circle close-btn" @click="closeSearch()"></i>
     <p v-if="$store.state.searching">Searching...</p>
     <p v-if="!$store.state.searching && !$store.state.searchDirty && $store.state.searchResults.length === 0" class="no-results">No results found.</p>
-    <div v-else v-for="result of $store.state.searchResults" class="search-result">
+    <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)" :class="{selected: result.selected}">
       <div class="search-img">
         <img v-bind:src="result.image" />
       </div>
@@ -27,6 +27,9 @@ export default {
   methods: {
     closeSearch() {
       this.$emit('searchclosed');
+    },
+    addTrack(track) {
+      this.$store.dispatch('selectTrack', track.id);
     }
   }
 }
@@ -62,6 +65,11 @@ export default {
   border-bottom: 1px solid #eee;
   padding: 8px 0;
   cursor: pointer;
+  transition: all .1s ease-in-out;
+
+  &.selected {
+    transform: translateX(120%);
+  }
 
   &:hover {
     background-color: #f8f8f8;

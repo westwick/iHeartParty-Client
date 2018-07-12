@@ -17,3 +17,7 @@ export function isNickSet() {
 export function setNick(nick) {
   localStorage.setItem('ihm_nick', nick);
 }
+
+export function getNick() {
+  return localStorage.getItem('ihm_nick');
+}

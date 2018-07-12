@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as _ from 'lodash';
+import { sendTrack } from './services/streamService';
 
 Vue.use(Vuex)
 
@@ -45,9 +47,22 @@ export default new Vuex.Store({
     },
     searchDirty(state, dirty) {
       state.searchDirty = dirty;
+    },
+    selectTrack(state, trackId) {
+      state.searchResults = _.map(state.searchResults, result => {
+        if (result.id === trackId) {
+          result.selected = true;
+        }
+        return result;
+      });
     }
   },
   actions: {
-
+    selectTrack({commit}, trackId) {
+      commit('selectTrack', trackId);
+      sendTrack(trackId).then(resp => {
+        console.log(resp);
+      });
+    }
   }
 })

@@ -61,7 +61,6 @@ export default {
         const tracks = resp.data.results.tracks;
         const onDemandTracks = _.filter(tracks, track => track.playbackRights.onDemand);
         this.$store.commit('endSearch', onDemandTracks);
-        console.log(onDemandTracks);
       })
     }, 500),
     clearSearch() {
