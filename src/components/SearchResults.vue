@@ -4,17 +4,22 @@
     <i class="far fa-times-circle close-btn" @click="closeSearch()"></i>
     <p v-if="$store.state.searching">Searching...</p>
     <p v-if="!$store.state.searching && !$store.state.searchDirty && $store.state.searchResults.length === 0" class="no-results">No results found.</p>
-    <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)" :class="{selected: result.selected}">
-      <div class="search-img">
-        <img v-bind:src="result.image" />
+    <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)">
+      <div class="added">
+        Your song was added!
       </div>
-      <div class="track-info">
-        <div class="search-title">
-          {{ result.title }}
-          <span v-if="result.version" class="song-version">({{ result.version }})</span>
+      <div class="track-wrapper" :class="{selected: result.selected}">
+        <div class="search-img">
+          <img v-bind:src="result.image" />
         </div>
-        <div class="search-artist">
-          {{ result.artistName }} &middot; {{ result.albumName }}
+        <div class="track-info">
+          <div class="search-title">
+            {{ result.title }}
+            <span v-if="result.version" class="song-version">({{ result.version }})</span>
+          </div>
+          <div class="search-artist">
+            {{ result.artistName }} &middot; {{ result.albumName }}
+          </div>
         </div>
       </div>
     </div>
@@ -63,16 +68,30 @@ export default {
 
 .search-result {
   border-bottom: 1px solid #eee;
-  padding: 8px 0;
   cursor: pointer;
-  transition: all .1s ease-in-out;
+  position: relative;
 
-  &.selected {
-    transform: translateX(120%);
+  .added {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  &:hover {
-    background-color: #f8f8f8;
+  .track-wrapper {
+    background: #fff;
+    padding: 8px 0;
+    transition: all .1s ease-in-out;
+    &.selected {
+      transform: translateX(120%);
+    }
+
+    &:hover {
+      background-color: #f8f8f8;
+    }
   }
 
   .search-img {
