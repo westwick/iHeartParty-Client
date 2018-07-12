@@ -45,25 +45,33 @@ export default {
   width: 100%;
   text-align: center;
   padding: 8px 0;
+  background: linear-gradient(to bottom, #C50930, #A60628);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  z-index: 100;
 }
 
 .close-btn {
-  position: absolute;
+  position: fixed;
   right: 8px;
   top: 10px;
   cursor: pointer;
+  color: #fff;
+  z-index: 101;
 }
 
 .search-results {
   width: 100vw;
   height: 100vh;
-  padding: 0 16px;
   position: fixed;
   top: 0;
   background: #fff;
   z-index: 1;
   text-align: left;
   overflow-y: scroll;
+  padding-top: 40px;
+  padding-bottom: 68px;
 }
 
 .search-result {
@@ -74,6 +82,7 @@ export default {
   .added {
     position: absolute;
     top: 0;
+    left: 16px;
     z-index: -1;
     height: 100%;
     display: flex;
@@ -83,7 +92,7 @@ export default {
 
   .track-wrapper {
     background: #fff;
-    padding: 8px 0;
+    padding: 8px 16px;
     transition: all .1s ease-in-out;
     &.selected {
       transform: translateX(120%);

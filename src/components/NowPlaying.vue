@@ -58,10 +58,13 @@ export default {
 }
 
 .album-art {
+  width: 80px;
+  height: 80px;
+  margin-right: 16px;
+  
   img {
     width: 80px;
     height: 80px;
-    margin-right: 16px;
   }
 }
 
