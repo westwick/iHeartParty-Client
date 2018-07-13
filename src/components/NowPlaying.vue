@@ -2,7 +2,7 @@
   <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
 
     <audio controls="" autoplay="true" preload="none" id="player"> 
-      <source src="http://localhost:8000/stream.ogg" type="audio/ogg">
+      <source src="http://api.iheart.party:8000/stream.ogg" type="audio/ogg">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
     

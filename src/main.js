@@ -5,7 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import axios from 'axios'
 import VueSocketio from 'vue-socket.io';
-Vue.use(VueSocketio, 'http://localhost:9090/rooms/1/meta');
+Vue.use(VueSocketio, 'http://api.iheart.party/rooms/1/meta');
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
