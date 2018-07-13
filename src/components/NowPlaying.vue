@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="song-meta">
-      <p>BPM: 120 | Key: F# Minor</p>
+      <p>Genre: Pop | Year: 1982 | BPM: 120 | Key: F# Minor</p>
     </div>
   </div>
 </template>
@@ -45,21 +45,22 @@ export default {
     margin-left: auto;
     width: 48px;
     height: 48px;
-    border: 1px solid #333;
+    border: 2px solid #222;
     border-radius: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    color: #333;
+    color: #222;
   }
 }
 
 .song-meta {
-  background: #bbb;
+  background: #333;
   text-align: left;
   padding: 8px 16px;
   font-size: 13px;
+  color: #fff;
 }
 
 .album-art {
@@ -70,6 +71,7 @@ export default {
   img {
     width: 80px;
     height: 80px;
+    -webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, 0.1)))
   }
 }
 
@@ -84,10 +86,10 @@ export default {
     font-size: 24px;
     font-weight: 700;
     line-height: 18px;
+    color: #000;
   }
   .song-artist {
     font-size: 18px;
-    margin-left: 5px;
   }
 }
 </style>

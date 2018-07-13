@@ -32,6 +32,10 @@ export default new Vuex.Store({
         name: 'bennett',
         avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
       }},
+      {artist: 'REM', title: 'Radio Free Europe', album: 'Green', addedBy: {
+        name: 'adarsh',
+        avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
+      }},
     ]
   },
   mutations: {

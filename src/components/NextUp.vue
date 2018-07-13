@@ -8,11 +8,11 @@
         <div class="next-up-rater">
           <div class="rater vote-down">
             <i class="far fa-thumbs-down"></i>
-            <span class="down-votes">3</span>
+            <span class="down-votes">2</span>
           </div>
           <div class="rater vote-up">
             <i class="far fa-thumbs-up"></i>
-            <span class="up-votes">1</span>
+            <span class="up-votes">4</span>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default {
   width: 35px;
   -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4); 
   box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
-  border: 1px solid #ddd;
+  border: 1px solid #666;
 }
 
 .next-track {
