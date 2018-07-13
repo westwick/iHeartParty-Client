@@ -3,7 +3,10 @@
     <p class="search-header">Search Results</p>
     <i class="far fa-times-circle close-btn" @click="closeSearch()"></i>
     <p v-if="$store.state.searching">Searching...</p>
-    <p v-if="!$store.state.searching && !$store.state.searchDirty && $store.state.searchResults.length === 0" class="no-results">No results found.</p>
+    <p v-if="!$store.state.searching && !$store.state.searchDirty && $store.state.searchResults.length === 0" class="no-results">
+      No results found.
+      <span>Try changing your search criteria.</span>
+    </p>
     <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)">
       <div class="added">
         Your song was added!
@@ -41,6 +44,15 @@ export default {
 </script>
 
 <style lang="scss">
+
+.no-results {
+  text-align: center;
+  margin-top: 24px;
+  span {
+    display: block;
+    color: #aaa;
+  }
+}
 .search-header {
   width: 100%;
   text-align: center;
