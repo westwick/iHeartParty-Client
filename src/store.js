@@ -21,16 +21,16 @@ export default new Vuex.Store({
     },
     nextUp: [
       {artist: 'Dr. Dre', title: 'The Next Episode', album: '2001', addedBy: {
-        name: 'andrew',
-        avatar: 'https://api.adorable.io/avatars/20/andrew.png'
+        name: 'andrea',
+        avatar: 'https://randomuser.me/api/portraits/women/22.jpg'
       }},
       {artist: 'Kanye West Feat. JAY Z & Big Sean', title: 'Clique', album: 'Cruel Summer', addedBy: {
         name: 'sivori',
-        avatar: 'https://api.adorable.io/avatars/20/sivori.png'
+        avatar: 'https://randomuser.me/api/portraits/men/20.jpg'
       }},
       {artist: 'C+C Music Factory', title: 'Gonna Make You Sweat (Everybody Dance Now)', album: 'Gonna Make You Sweat', addedBy: {
         name: 'bennett',
-        avatar: 'https://api.adorable.io/avatars/20/bennett.png'
+        avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
       }},
     ]
   },

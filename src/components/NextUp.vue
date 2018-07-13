@@ -38,11 +38,13 @@ export default {
 }
 
 .next-avatar img {
-  border-radius: 25px;
+  border-radius: 20px;
   float: left;
   margin-right: 20px;
-  -webkit-box-shadow: 4px 0px 6px 0px rgba(0,0,0,0.4); 
-  box-shadow: 4px 0px 6px 0px rgba(0,0,0,0.4);
+  width: 35px;
+  -webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4); 
+  box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.4);
+  border: 1px solid #ddd;
 }
 
 .next-track {
