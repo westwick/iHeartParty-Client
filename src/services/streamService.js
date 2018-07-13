@@ -13,3 +13,12 @@ export function sendTrack (trackId) {
   });
 }
 
+export function voteTrack (trackId, up) {
+  return axios.post(apiRoot + '/rooms/1/vote', {
+    id: trackId,
+    user: getNick(),
+    avatar: 'whatever',
+    up: up
+  });
+}
+

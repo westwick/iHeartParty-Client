@@ -1,21 +1,26 @@
 <template>
   <div class="next-up-wrapper">
     <div class="next-tracks-container">
-      <div class="next-track" v-for="track in $store.state.nextUp">
-        <div class="next-avatar"><img :src="track.addedBy.avatar" :title="track.addedBy.name"></div>
-        <div class="next-title">{{ track.title }}</div>
-        <div class="next-artist">{{ track.artist }} &middot; {{track.album}}</div>
-        <div class="next-up-rater">
-          <div class="rater vote-down">
-            <i class="far fa-thumbs-down"></i>
-            <span class="down-votes">2</span>
-          </div>
-          <div class="rater vote-up">
-            <i class="far fa-thumbs-up"></i>
-            <span class="up-votes">4</span>
+      <div class="no-tracks" v-if="$store.state.nextUp.length === 0">
+        <h2>No Tracks Added</h2>
+        <p>Use the search below to add some songs to the group playlist!</p>
+      </div>
+      <transition-group name="flip-list" tag="div">
+        <div v-if="$store.state.nextUp.length > 0" class="next-track" v-for="track in $store.state.nextUp" :key="track.id">
+          <div class="next-title">{{ track.title }}</div>
+          <div class="next-artist">{{ track.artistName }} &middot; {{track.albumName}}</div>
+          <div class="next-up-rater">
+            <div class="rater vote-down" @click="downvoteTrack(track.id)">
+              <i class="far fa-thumbs-down"></i>
+              <span class="down-votes">{{ track.votes.down }}</span>
+            </div>
+            <div class="rater vote-up" @click="upvoteTrack(track.id)">
+              <i class="far fa-thumbs-up"></i>
+              <span class="up-votes">{{ track.votes.up }}</span>
+            </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -23,10 +28,32 @@
 <script>
 export default {
   name: 'NextUp',
+  methods: {
+    upvoteTrack(id) {
+      this.$store.dispatch('upvoteTrack', id)
+    },
+    downvoteTrack(id) {
+      this.$store.dispatch('downvoteTrack', id)
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.flip-list-move {
+  transition: transform .75s ease-in-out;
+}
+
+.no-tracks {
+  text-align: center;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
 .next-up-wrapper {
   text-align: left;
   padding: 0 16px;
@@ -59,12 +86,16 @@ export default {
   top: 12px;
   display: flex;
   .rater {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-left: 16px;
-    color: #bbb;
+    color: #aaa;
+    &:hover {
+      color: #666;
+    }
     .up-votes,.down-votes {
       font-size: 12px;
       color: #bbb;

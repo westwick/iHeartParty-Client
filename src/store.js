@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as _ from 'lodash';
-import { sendTrack } from './services/streamService';
+import { sendTrack, voteTrack } from './services/streamService';
 
 Vue.use(Vuex)
 
@@ -14,29 +14,8 @@ export default new Vuex.Store({
     user: {
       nickname: ''
     },
-    currentSong: {
-      artist: 'Michael Jackson',
-      title: 'Thriller',
-      album: 'Thriller'
-    },
-    nextUp: [
-      {artist: 'Dr. Dre', title: 'The Next Episode', album: '2001', addedBy: {
-        name: 'andrea',
-        avatar: 'https://randomuser.me/api/portraits/women/22.jpg'
-      }},
-      {artist: 'Kanye West Feat. JAY Z & Big Sean', title: 'Clique', album: 'Cruel Summer', addedBy: {
-        name: 'sivori',
-        avatar: 'https://randomuser.me/api/portraits/men/20.jpg'
-      }},
-      {artist: 'C+C Music Factory', title: 'Gonna Make You Sweat (Everybody Dance Now)', album: 'Gonna Make You Sweat', addedBy: {
-        name: 'bennett',
-        avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
-      }},
-      {artist: 'REM', title: 'Radio Free Europe', album: 'Green', addedBy: {
-        name: 'adarsh',
-        avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
-      }},
-    ]
+    currentSong: null,
+    nextUp: []
   },
   mutations: {
     setNick(state, nickname) {
@@ -68,14 +47,40 @@ export default new Vuex.Store({
         }
         return result;
       });
+    },
+    // websocket events
+    setCurrentTrack(state, track) {
+      if (track === null) return;
+      state.currentSong = {
+        artist: track.artistName,
+        title: track.title,
+        album: track.albumname,
+        img: track.imageUrl,
+        addedBy: track.addedBy
+      }
+    },
+    setPlaylist(state, playlist) {
+      if (playlist && playlist !== null && playlist.length > 0) {
+        state.nextUp = playlist;
+      }
     }
   },
   actions: {
     selectTrack({commit}, trackId) {
       commit('selectTrack', trackId);
       sendTrack(trackId).then(resp => {
-        console.log(resp);
+        // console.log(resp);
       });
+    },
+    upvoteTrack({commit}, trackId) {
+      voteTrack(trackId, true).then(resp => {
+        // console.log(resp)
+      })
+    },
+    downvoteTrack({commit}, trackId) {
+      voteTrack(trackId, false).then(resp => {
+        // console.log(resp)
+      })
     }
   }
 })

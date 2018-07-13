@@ -1,14 +1,14 @@
 <template>
-  <div class="now-playing-wrapper" id="vz">
+  <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
 
     <audio controls="" autoplay="true" preload="none" id="player"> 
       <source src="http://localhost:8000/stream.ogg" type="audio/ogg">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
     
-    <div class="now-playing">
+    <div class="now-playing" v-if="$store.state.currentSong !== null">
       <div class="album-art">
-        <img src="../assets/mj.jpg" />
+        <img :src="$store.state.currentSong.img" />
       </div>
       <div class="song-info">
         <div class="song-title">{{$store.state.currentSong.title}}</div>
@@ -18,8 +18,10 @@
         <i class="fas fa-volume-up" @click="startViz()"></i>
       </div>
     </div>
+    <div v-else class="no-song-playing"> No Song Playing </div>
     <div class="song-meta">
-      <p>Genre: Pop | Year: 1982 | BPM: 120 | Key: F# Minor</p>
+      <p v-if="$store.state.currentSong !== null">Song added by {{$store.state.currentSong.addedBy.name}}</p>
+      <p v-else>No Track Data</p>
     </div>
   </div>
 </template>
@@ -27,60 +29,29 @@
 <script>
 export default {
   name: 'NowPlaying',
-  methods: {
-    startViz() {
-      var audioElement = document.getElementById('player');
-      var parentElement = document.getElementById('vz');
-      var visualizer = new AudioVisualizer();
-
-      // Create Web Audio API references and creates container svg element for visualizer inserted inside parentElement
-      visualizer.containerHeight = 400;
-      visualizer.containerWidth = 400;
-      visualizer.create(audioElement, parentElement);
-
-      // Refer to Web Audio API analyser for option's reference
-      visualizer.analyserOptions({
-        fftSize: 2048,
-        minDecibels: -87,
-        maxDecibels: -3,
-        smoothingTimeConstant: 0.83
-      });
-
-      // CSS styling for visualizer container
-      visualizer.containerStyles({
-        position: 'absolute',
-        top: visualizer.containerHeight * -1,
-        left: 0,
-        'z-index': 10000,
-        'pointer-events': 'none'
-      });
-
-      // Options for visualization bars
-      // Available colors: purple, blue, green, red, orange, gray
-      visualizer.options({
-        color: 'orange',
-        opacity: 0.7,
-        interval: 30,
-        frequencyDataDivide: 9,
-        barPadding: 1.7
-      });
-
-      visualizer.initialize();
-      visualizer.start();
-    }
-  }
 }
 </script>
 
 <style lang="scss">
 .now-playing-wrapper {
   background: #ccc;
-  background: linear-gradient(to bottom, rgba(20,20,21,.68), rgba(20,20,19,.70)), url('../assets/spectrum.gif') 50% 50% no-repeat;
-  background-size: cover;
+
+  &.hassong {
+    background: linear-gradient(to bottom, rgba(20,20,21,.68), rgba(20,20,19,.70)), url('../assets/spectrum.gif') 50% 50% no-repeat;
+    background-size: cover;
+  }
 }
 
 #player {
   display: none;
+}
+
+.no-song-playing {
+  padding: 0 16px;
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .now-playing {

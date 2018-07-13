@@ -17,6 +17,19 @@ import SearchBar from '../components/SearchBar'
 export default {
   name: 'searchbar',
   components: { NowPlaying, NextUp, SearchBar, SearchResults },
+  sockets:{
+    connect: function(){
+      // console.log('socket connected')
+    },
+    track: function(val) {
+      console.log('track', val);
+      this.$store.commit('setCurrentTrack', val);
+    },
+    playlist: function(val) {
+      console.log('playlist', val)
+      this.$store.commit('setPlaylist', val);
+    }
+  },
   methods: {
     clearSearch() {
       this.$store.commit('closeSearch');
