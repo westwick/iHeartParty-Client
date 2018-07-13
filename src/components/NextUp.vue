@@ -2,7 +2,7 @@
   <div class="next-up-wrapper">
     <div class="next-tracks-container">
       <div class="next-track" v-for="track in $store.state.nextUp">
-        <div class="next-avatar"><img :src="track.addedBy.avatar"></div>
+        <div class="next-avatar"><img :src="track.addedBy.avatar" :title="track.addedBy.name"></div>
         <div class="next-title">{{ track.title }}</div>
         <div class="next-artist">{{ track.artist }} &middot; {{track.album}}</div>
         <div class="next-up-rater">

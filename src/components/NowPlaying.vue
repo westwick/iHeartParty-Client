@@ -26,8 +26,13 @@ export default {
 
 <style lang="scss">
 .now-playing-wrapper {
-  background: #ccc;
-}
+  /* background: #ccc; */
+  background: rgb(238,238,238); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+  }
 
 .now-playing {
   padding: 0 16px;
@@ -77,10 +82,12 @@ export default {
 
   .song-title {
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 700;
+    line-height: 18px;
   }
   .song-artist {
-    font-size: 20px;
+    font-size: 18px;
+    margin-left: 5px;
   }
 }
 </style>
