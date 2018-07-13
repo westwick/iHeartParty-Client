@@ -2,6 +2,7 @@
   <div class="next-up-wrapper">
     <div class="next-tracks-container">
       <div class="next-track" v-for="track in $store.state.nextUp">
+        <div class="next-avatar"><img :src="track.addedBy.avatar"></div>
         <div class="next-title">{{ track.title }}</div>
         <div class="next-artist">{{ track.artist }} &middot; {{track.album}}</div>
         <div class="next-up-rater">
@@ -34,6 +35,14 @@ export default {
     font-weight: bold;
     margin-bottom: 8px;
   }
+}
+
+.next-avatar img {
+  border-radius: 25px;
+  float: left;
+  margin-right: 20px;
+  -webkit-box-shadow: 4px 0px 6px 0px rgba(0,0,0,0.4); 
+  box-shadow: 4px 0px 6px 0px rgba(0,0,0,0.4);
 }
 
 .next-track {

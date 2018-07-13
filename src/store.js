@@ -20,9 +20,18 @@ export default new Vuex.Store({
       album: 'Thriller'
     },
     nextUp: [
-      {artist: 'Dr. Dre', title: 'The Next Episode', album: '2001'},
-      {artist: 'Kanye West Feat. JAY Z & Big Sean', title: 'Clique', album: 'Cruel Summer'},
-      {artist: 'C+C Music Factory', title: 'Gonna Make You Sweat (Everybody Dance Now)', album: 'Gonna Make You Sweat'}
+      {artist: 'Dr. Dre', title: 'The Next Episode', album: '2001', addedBy: {
+        name: 'andrew',
+        avatar: 'https://api.adorable.io/avatars/20/andrew.png'
+      }},
+      {artist: 'Kanye West Feat. JAY Z & Big Sean', title: 'Clique', album: 'Cruel Summer', addedBy: {
+        name: 'sivori',
+        avatar: 'https://api.adorable.io/avatars/20/sivori.png'
+      }},
+      {artist: 'C+C Music Factory', title: 'Gonna Make You Sweat (Everybody Dance Now)', album: 'Gonna Make You Sweat', addedBy: {
+        name: 'bennett',
+        avatar: 'https://api.adorable.io/avatars/20/bennett.png'
+      }},
     ]
   },
   mutations: {
