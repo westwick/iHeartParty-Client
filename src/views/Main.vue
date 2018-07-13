@@ -3,7 +3,7 @@
     <now-playing></now-playing>
     <next-up></next-up>
 
-    <search-results v-if="$store.state.showSearchResults" v-on:searchclosed="clearSearch"></search-results>
+    <search-results :class="{expanded: $store.state.showSearchResults}" v-on:searchclosed="clearSearch"></search-results>
     <search-bar ref="searchbar"></search-bar>
   </div>
 </template>

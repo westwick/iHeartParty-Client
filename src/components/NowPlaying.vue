@@ -1,5 +1,11 @@
 <template>
-  <div class="now-playing-wrapper">
+  <div class="now-playing-wrapper" id="vz">
+
+    <audio controls="" autoplay="true" preload="none" id="player"> 
+      <source src="http://localhost:8000/stream.ogg" type="audio/ogg">
+      <p>Your browser doesn't support HTML audio. Sorry.</p>
+    </audio>
+    
     <div class="now-playing">
       <div class="album-art">
         <img src="../assets/mj.jpg" />
@@ -9,7 +15,7 @@
         <div class="song-artist">{{$store.state.currentSong.artist}}</div>
       </div>
       <div class="volume-control">
-        <i class="fas fa-volume-up"></i>
+        <i class="fas fa-volume-up" @click="startViz()"></i>
       </div>
     </div>
     <div class="song-meta">
@@ -21,18 +27,61 @@
 <script>
 export default {
   name: 'NowPlaying',
+  methods: {
+    startViz() {
+      var audioElement = document.getElementById('player');
+      var parentElement = document.getElementById('vz');
+      var visualizer = new AudioVisualizer();
+
+      // Create Web Audio API references and creates container svg element for visualizer inserted inside parentElement
+      visualizer.containerHeight = 400;
+      visualizer.containerWidth = 400;
+      visualizer.create(audioElement, parentElement);
+
+      // Refer to Web Audio API analyser for option's reference
+      visualizer.analyserOptions({
+        fftSize: 2048,
+        minDecibels: -87,
+        maxDecibels: -3,
+        smoothingTimeConstant: 0.83
+      });
+
+      // CSS styling for visualizer container
+      visualizer.containerStyles({
+        position: 'absolute',
+        top: visualizer.containerHeight * -1,
+        left: 0,
+        'z-index': 10000,
+        'pointer-events': 'none'
+      });
+
+      // Options for visualization bars
+      // Available colors: purple, blue, green, red, orange, gray
+      visualizer.options({
+        color: 'orange',
+        opacity: 0.7,
+        interval: 30,
+        frequencyDataDivide: 9,
+        barPadding: 1.7
+      });
+
+      visualizer.initialize();
+      visualizer.start();
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .now-playing-wrapper {
-  /* background: #ccc; */
-  background: rgb(238,238,238); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-  }
+  background: #ccc;
+  background: linear-gradient(to bottom, rgba(20,20,21,.68), rgba(20,20,19,.70)), url('../assets/spectrum.gif') 50% 50% no-repeat;
+  background-size: cover;
+}
+
+#player {
+  display: none;
+}
 
 .now-playing {
   padding: 0 16px;
@@ -45,13 +94,13 @@ export default {
     margin-left: auto;
     width: 48px;
     height: 48px;
-    border: 2px solid #222;
+    border: 2px solid #FFF;
     border-radius: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    color: #222;
+    color: #FFF;
   }
 }
 
@@ -84,12 +133,13 @@ export default {
 
   .song-title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 18px;
-    color: #000;
+    color: #FFF;
   }
   .song-artist {
     font-size: 18px;
+    color: #ddd;
   }
 }
 </style>

@@ -55,10 +55,11 @@ export default {
 .close-btn {
   position: fixed;
   right: 8px;
-  top: 10px;
+  top: 8px;
   cursor: pointer;
   color: #fff;
   z-index: 101;
+  font-size: 24px;
 }
 
 .search-results {
@@ -72,6 +73,12 @@ export default {
   overflow-y: scroll;
   padding-top: 40px;
   padding-bottom: 68px;
+  transition: all .3s ease-in-out;
+  transform: translateY(100vh);
+
+  &.expanded {
+    transform: translateY(0);
+  }
 }
 
 .search-result {
