@@ -1,7 +1,7 @@
 <template>
   <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
 
-    <audio controls="" autoplay="true" preload="none" id="player"> 
+    <audio controls="" autoplay="true" preload="none" id="player" :muted="soundMuted"> 
       <source src="http://api.iheart.party:8000/stream.ogg" type="audio/ogg">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
@@ -14,8 +14,8 @@
         <div class="song-title">{{$store.state.currentSong.title}}</div>
         <div class="song-artist">{{$store.state.currentSong.artist}}</div>
       </div>
-      <div class="volume-control">
-        <i class="fas fa-volume-up" @click="startViz()"></i>
+      <div class="volume-control" :class="{muted: soundMuted}" @click="toggleSound()">
+        <i class="fas fa-volume-up"></i>
       </div>
     </div>
     <div v-else class="no-song-playing"> No Song Playing </div>
@@ -29,6 +29,16 @@
 <script>
 export default {
   name: 'NowPlaying',
+  data() {
+    return {
+      soundMuted: false
+    }
+  },
+  methods: {
+    toggleSound() {
+      this.soundMuted = !this.soundMuted;
+    }
+  }
 }
 </script>
 
@@ -65,6 +75,8 @@ export default {
     margin-left: auto;
     width: 48px;
     height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     border: 2px solid #FFF;
     border-radius: 48px;
     display: flex;
@@ -72,6 +84,11 @@ export default {
     justify-content: center;
     font-size: 24px;
     color: #FFF;
+
+    &.muted {
+      color: #bbb;
+      border-color: #bbb;
+    }
   }
 }
 
