@@ -56,7 +56,8 @@ export default {
 
 .next-up-wrapper {
   text-align: left;
-  padding: 0 16px;
+  padding: 0 16px 68px;
+
 
   h2 {
     font-weight: bold;
