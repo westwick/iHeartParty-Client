@@ -1,7 +1,7 @@
 <template>
   <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
 
-    <audio controls="" autoplay="true" preload="none" id="player" :muted="soundMuted"> 
+    <audio controls="" autoplay="true" preload="none" id="player" ref="audio"> 
       <source src="http://api.iheart.party:8000/stream.ogg" type="audio/ogg">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
@@ -37,6 +37,7 @@ export default {
   methods: {
     toggleSound() {
       this.soundMuted = !this.soundMuted;
+      this.$refs.audio.muted = this.soundMuted;
     }
   }
 }
@@ -84,10 +85,11 @@ export default {
     justify-content: center;
     font-size: 24px;
     color: #FFF;
+    cursor: pointer;
 
     &.muted {
-      color: #bbb;
-      border-color: #bbb;
+      color: rgba(255,255,255,.5);
+      border-color: rgba(255,255,255,.5);
     }
   }
 }
