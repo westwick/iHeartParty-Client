@@ -26,8 +26,15 @@
 </template>
 
 <script>
+import { getNick } from '../services/auth';
+
 export default {
   name: 'NextUp',
+  data() {
+    return {
+      nickname: getNick()
+    }
+  },
   methods: {
     upvoteTrack(id) {
       this.$store.dispatch('upvoteTrack', id)
@@ -42,14 +49,11 @@ export default {
       return this.checkVotesByUser(track) > 0;
     },
     checkVotesByUser(track) {
-      const username = this.$store.state.user.nickname;
-      console.log('username', username);
-      console.log('uservote', Object.keys(track.userVotes));
+      const username = this.nickname;
       let vote = 0;
       Object.keys(track.userVotes).forEach(user => {
         if (user === username) {
           vote = track.userVotes[username];
-          console.log('found vote', vote);
         }
       });
       return vote;
