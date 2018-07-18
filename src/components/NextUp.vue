@@ -11,11 +11,11 @@
           <div class="next-artist">{{ track.artistName }} &middot; {{track.albumName}}</div>
           <div class="next-up-rater">
             <div class="rater vote-down" @click="downvoteTrack(track.id)">
-              <i class="far fa-thumbs-down"></i>
+              <i class="far fa-thumbs-down" :class="{downvoted: didUserDownvoteTrack(track)}"></i>
               <span class="down-votes">{{ track.votes.down }}</span>
             </div>
             <div class="rater vote-up" @click="upvoteTrack(track.id)">
-              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-thumbs-up" :class="{upvoted: didUserUpvoteTrack(track)}"></i>
               <span class="up-votes">{{ track.votes.up }}</span>
             </div>
           </div>
@@ -34,6 +34,22 @@ export default {
     },
     downvoteTrack(id) {
       this.$store.dispatch('downvoteTrack', id)
+    },
+    didUserDownvoteTrack(track) {
+      return this.checkVotesByUser(track) < 0;
+    },
+    didUserUpvoteTrack(track) {
+      return this.checkVotesByUser(track) > 0;
+    },
+    checkVotesByUser(track) {
+      const username = this.$store.state.user.nickname;
+      let vote = 0;
+      Object.keys(track.userVotes).forEach(user => {
+        if (user === username) {
+          vote = track.userVotes[username];
+        }
+      });
+      return vote;
     }
   }
 }
@@ -96,6 +112,9 @@ export default {
     color: #aaa;
     &:hover {
       color: #666;
+    }
+    .upvoted, .downvoted {
+      color: #333;
     }
     .up-votes,.down-votes {
       font-size: 12px;
