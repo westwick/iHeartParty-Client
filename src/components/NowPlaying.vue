@@ -97,9 +97,12 @@ export default {
 .song-meta {
   background: #333;
   text-align: left;
-  padding: 8px 16px;
+  padding: 0 16px;
   font-size: 13px;
   color: #fff;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .album-art {

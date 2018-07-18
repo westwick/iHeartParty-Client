@@ -79,7 +79,13 @@ export default {
 
 .next-up-wrapper {
   text-align: left;
-  padding: 0 16px 68px;
+  padding: 0 16px;
+  overflow-y: scroll;
+  // now-playing = 112px
+  // song-meta   = 40px
+  // search-bar  = 68px
+  // total       = 220px
+  height: calc(100vh - 220px);
 
 
   h2 {

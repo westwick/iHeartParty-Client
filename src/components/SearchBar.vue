@@ -73,9 +73,10 @@ export default {
 
 <style lang="scss">
 .search-bar {
-  width: 100vw;
+  width: 100%;
   background: #C50930;
   padding: 16px;
+  height: 68px;
   background: linear-gradient(to bottom, #C50930, #A60628);
   position: fixed;
   z-index: 99;
