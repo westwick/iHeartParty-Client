@@ -7,6 +7,10 @@
       </div>
       <transition-group name="flip-list" tag="div">
         <div v-if="$store.state.nextUp.length > 0" class="next-track" v-for="track in $store.state.nextUp" :key="track.id">
+          <div class="track-score" :class="{pos: track.votes.score >= 0, neg: track.votes.score < 0}">
+            <span v-if="track.votes.score > 0">+</span>
+            {{ track.votes.score }}
+          </div>
           <div class="next-title">{{ track.title }}</div>
           <div class="next-artist">{{ track.artistName }} &middot; {{track.albumName}}</div>
           <div class="next-up-rater">
@@ -106,8 +110,25 @@ export default {
 
 .next-track {
   border-bottom: 1px solid #eee;
-  padding: 8px 64px 8px 0;
+  padding: 8px 64px 8px 48px;
   position: relative;
+
+  .track-score {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    &.pos {
+      color: #52d521;
+    }
+    &.neg {
+      color: #c51f19;
+    }
+  }
 }
 
 .next-up-rater {
