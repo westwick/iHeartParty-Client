@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { getNick } from './auth';
 
-const apiRoot = 'http://api.iheart.party';
-// const apiRoot = 'http://localhost:9090';
+let apiRoot;
+if (window.location.href.includes("localhost")) {
+  apiRoot = 'http://localhost:9090';
+} else {
+  apiRoot = 'http://api.iheart.party';
+}
 
 export function sendTrack (trackId) {
   return axios.post(apiRoot + '/rooms/1/vote', {

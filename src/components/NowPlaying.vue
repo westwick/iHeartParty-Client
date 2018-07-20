@@ -2,7 +2,7 @@
   <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
 
     <audio controls="" autoplay="true" preload="none" id="player" ref="audio"> 
-      <source src="http://api.iheart.party:8000/stream.ogg" type="audio/ogg">
+      <source :src="streamUrl" type="audio/mp4">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
     
@@ -31,7 +31,9 @@ export default {
   name: 'NowPlaying',
   data() {
     return {
-      soundMuted: false
+      soundMuted: false,
+      streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg"
+       : "http://api.iheart.party:8000/stream.ogg"
     }
   },
   methods: {
