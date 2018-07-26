@@ -81,6 +81,10 @@ export default new Vuex.Store({
       voteTrack(trackId, false).then(resp => {
         // console.log(resp)
       })
+    },
+    voteToSkip({state}) {
+      const trackId = state.currentSong.id;
+      voteTrack(trackId, false).then(resp => {});
     }
   }
 })

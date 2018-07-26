@@ -20,7 +20,12 @@
     </div>
     <div v-else class="no-song-playing"> No Song Playing </div>
     <div class="song-meta">
-      <p v-if="$store.state.currentSong !== null">Song added by {{$store.state.currentSong.addedBy.name}}</p>
+      <p v-if="$store.state.currentSong !== null">
+        Song added by {{$store.state.currentSong.addedBy.name}}
+        <span class="vote-to-skip">
+          <a href="#" (click)="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
+        </span>
+      </p>
       <p v-else>No Track Data</p>
     </div>
   </div>
@@ -40,6 +45,9 @@ export default {
     toggleSound() {
       this.soundMuted = !this.soundMuted;
       this.$refs.audio.muted = this.soundMuted;
+    },
+    voteToSkip() {
+      this.$store.dispatch('voteToSkip');
     }
   }
 }
@@ -105,6 +113,16 @@ export default {
   height: 40px;
   display: flex;
   align-items: center;
+
+  .vote-to-skip {
+    position: absolute;
+    right: 16px;
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
 }
 
 .album-art {
