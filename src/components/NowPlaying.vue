@@ -22,6 +22,9 @@
     <div class="song-meta">
       <p v-if="$store.state.currentSong !== null">
         Song added by {{$store.state.currentSong.addedBy.name}}
+        <span class="vote-to-skip">
+          <a href="#" @click.prevent="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
+        </span>
       </p>
       <p v-else>No Track Data</p>
     </div>
