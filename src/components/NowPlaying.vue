@@ -23,7 +23,8 @@
       <p v-if="$store.state.currentSong !== null">
         Song added by {{$store.state.currentSong.addedBy.name}}
         <span class="vote-to-skip">
-          <a href="#" @click.prevent="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
+          <span v-if="$store.state.currentSong.votes.down > 5">Track skipped, starting next song...</span>
+          <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
         </span>
       </p>
       <p v-else>No Track Data</p>
@@ -114,9 +115,15 @@ export default {
   display: flex;
   align-items: center;
 
+  p {
+    position: relative;
+    width: 100%;
+  }
+
   .vote-to-skip {
     position: absolute;
-    right: 16px;
+    right: 0;
+    top: 0;
 
     a {
       color: #fff;
