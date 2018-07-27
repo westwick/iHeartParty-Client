@@ -7,7 +7,7 @@
       No results found.
       <span>Try changing your search criteria.</span>
     </p>
-    <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)">
+    <div v-else v-for="result of $store.state.searchResults" class="search-result" @click="addTrack(result)" :key="result.id">
       <div class="added">
         Your song was added!
       </div>
