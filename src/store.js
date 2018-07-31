@@ -56,7 +56,7 @@ export default new Vuex.Store({
         artist: track.artistName,
         title: track.title,
         album: track.albumname,
-        img: track.imageUrl,
+        img: track.imagePath,
         addedBy: track.addedBy,
         votes: track.votes
       }
