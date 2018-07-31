@@ -38,8 +38,8 @@ export default {
   data() {
     return {
       soundMuted: false,
-      streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg"
-       : "http://api.iheart.party:8000/stream.ogg"
+      streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg?"  + this.makeid()
+       : "http://api.iheart.party:8000/stream.ogg?" + this.makeid()
     }
   },
   methods: {
@@ -49,6 +49,15 @@ export default {
     },
     voteToSkip() {
       this.$store.dispatch('voteToSkip');
+    },
+    makeid() {
+      let text = '';
+      const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+      for (let i = 0; i < 16; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      return text;
     }
   }
 }
