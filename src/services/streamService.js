@@ -33,6 +33,7 @@ export function addYoutubeTrack(url) {
     id: url,
     user: getNick(),
     avatar: 'whatever',
+    up: true
   });
 }
 
