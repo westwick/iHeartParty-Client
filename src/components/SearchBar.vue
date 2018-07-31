@@ -73,7 +73,7 @@ export default {
       });
     }, 500),
     submitLink(e) {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 && /http/.test(this.searchTerm)) {
         this.$store.commit('startSearch');
         addYoutubeTrack(this.searchTerm).then(resp => {
           this.$store.commit('endSearch', []);
