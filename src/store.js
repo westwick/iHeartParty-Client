@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    youtubeSuccess: false,
     searching: false,
     showSearchResults: false,
     searchDirty: false,
@@ -64,6 +65,9 @@ export default new Vuex.Store({
       if (playlist && playlist !== null && playlist.length > 0) {
         state.nextUp = playlist;
       }
+    },
+    youtubeSuccess(state, success) {
+      state.youtubeSuccess = success;
     }
   },
   actions: {

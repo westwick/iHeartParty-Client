@@ -1,7 +1,12 @@
 <template>
   <div class="search-bar">
     <div class="control has-icons-left">
-      <input type="text" class="input" v-model="searchTerm" placeholder="Search by Artist, Track, or Album" />
+      <input 
+        type="text" 
+        class="input" 
+        v-model="searchTerm" 
+        @keyup="submitLink"
+        placeholder="Search by Artist, Track, or Album" />
       <span class="icon is-small is-left">
         <i class="fas fa-search"></i>
       </span>
@@ -11,6 +16,7 @@
 
 <script>
 import * as _ from 'lodash';
+import { addYoutubeTrack } from '../services/streamService';
 
 export default {
   name: 'SearchBar',
@@ -30,16 +36,19 @@ export default {
       if (this.isClearing) {
         this.isClearing = false;
       } else {
+        this.$store.commit('youtubeSuccess', false);
         this.$store.commit('searchDirty', true);
         this.$store.commit('openSearch');
-        this.search();
+        if (!/http/.test(this.searchTerm)) {
+          this.search();
+        }
       }
     }
   },
   methods: {
     search: _.debounce(function() {
       this.busy = true;
-      this.$store.commit('startSearch')
+      this.$store.commit('startSearch');
       this.$http.get(this.apiUrl + '/v3/search/all', {
         headers: this.headers,
         params: {
@@ -61,8 +70,17 @@ export default {
         const tracks = resp.data.results.tracks;
         const onDemandTracks = _.filter(tracks, track => track.playbackRights.onDemand);
         this.$store.commit('endSearch', onDemandTracks);
-      })
+      });
     }, 500),
+    submitLink(e) {
+      if (e.keyCode === 13) {
+        this.$store.commit('startSearch');
+        addYoutubeTrack(this.searchTerm).then(resp => {
+          this.$store.commit('endSearch', []);
+          this.$store.commit('youtubeSuccess', true);
+        });
+      }
+    },
     clearSearch() {
       this.isClearing = true;
       this.searchTerm = '';

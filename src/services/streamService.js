@@ -10,6 +10,7 @@ if (window.location.href.includes("localhost")) {
 
 export function sendTrack (trackId) {
   return axios.post(apiRoot + '/rooms/1/vote', {
+    type: 'ihr',
     id: trackId,
     user: getNick(),
     avatar: 'whatever',
@@ -22,7 +23,16 @@ export function voteTrack (trackId, up) {
     id: trackId,
     user: getNick(),
     avatar: 'whatever',
-    up: up
+    up
+  });
+}
+
+export function addYoutubeTrack(url) {
+  return axios.post(apiRoot + '/rooms/1/vote', {
+    type: 'yt',
+    id: url,
+    user: getNick(),
+    avatar: 'whatever',
   });
 }
 
