@@ -61,15 +61,15 @@ export default {
     })
   },
   watch: {
-    currentSong: function () {
-      console.log('song changed');
+    currentSong: function (song) {
+      console.log('song changed', song);
       this.startTimer = false;
       setTimeout(() => {
         this.startTimer = true;
       }, 100);
     },
-    startTimer: function () {
-      console.log('startTimer changed');
+    startTimer: function (val) {
+      console.log('startTimer changed', val);
     }
   },
   methods: {
@@ -81,7 +81,7 @@ export default {
       this.$store.dispatch('voteToSkip');
     },
     handleTimeExpire() {
-      this.startTimer = false;
+      // this.startTimer = false;
     },
     makeid() {
       let text = '';
