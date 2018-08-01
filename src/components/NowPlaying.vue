@@ -23,6 +23,9 @@
       <p v-if="$store.state.currentSong !== null">
         Song added by {{$store.state.currentSong.addedBy.name}}
         <span class="vote-to-skip">
+          <span class="song-timeleft">
+            <vue-countdown :seconds="$store.state.currentSong.duration" :start="true"><vue-countdown>
+          </span>
           <span v-if="$store.state.currentSong.votes.down > 5">Track skipped, starting next song...</span>
           <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
         </span>
@@ -33,8 +36,11 @@
 </template>
 
 <script>
+import VueCountdown from '@dmaksimovic/vue-countdown';
+
 export default {
   name: 'NowPlaying',
+  components: { VueCountdown },
   data() {
     return {
       soundMuted: false,
