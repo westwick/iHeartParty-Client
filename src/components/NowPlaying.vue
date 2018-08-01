@@ -173,6 +173,10 @@ export default {
 .song-timeleft {
   display: inline-block;
   margin-right: 16px;
+
+  .vue-countdown {
+    display: inline-block;
+  }
 }
 
 .album-art {
