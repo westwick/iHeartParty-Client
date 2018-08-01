@@ -29,7 +29,7 @@
                :message="'preparing next song'"
                :time-expire="handleTimeExpire"
                :start="startTimer">
-             <vue-countdown>
+             </vue-countdown>
           </span>
           <span v-if="currentSong.votes.down > 5">Track skipped, starting next song...</span>
           <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{currentSong.votes.down}} votes)
