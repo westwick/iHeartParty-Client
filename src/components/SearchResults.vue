@@ -83,7 +83,7 @@ export default {
   position: fixed;
   top: 0;
   background: #fff;
-  z-index: 1;
+  z-index: 4;
   text-align: left;
   overflow-y: scroll;
   padding-top: 40px;
