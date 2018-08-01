@@ -25,7 +25,7 @@
         <span class="vote-to-skip">
           <span class="song-timeleft">
             -<vue-countdown 
-               :seconds="currentSong.duration - 500"
+               :seconds="timeLeft"
                :message="'preparing next song'"
                :time-expire="handleTimeExpire"
                :start="startTimer">
@@ -50,6 +50,7 @@ export default {
   data() {
     return {
       startTimer: true,
+      timeLeft: 30,
       soundMuted: false,
       streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg?"  + this.makeid()
        : "http://api.iheart.party:8000/stream.ogg?" + this.makeid()
@@ -64,6 +65,7 @@ export default {
     currentSong: function (song) {
       console.log('song changed', song);
       this.startTimer = false;
+      this.timeLeft = song.duration;
       setTimeout(() => {
         this.startTimer = true;
       }, 100);
