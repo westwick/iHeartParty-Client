@@ -9,7 +9,7 @@
     <div class="now-playing" v-if="currentSong !== null">
       <div class="album-art">
         <img class="album-main" :src="currentSong.img" />
-        <img class="fallback" :src="~assets/logosquare.jpg" />
+        <img class="fallback" src="../assets/logosquare.jpg" />
       </div>
       <div class="song-info">
         <div class="song-title">{{currentSong.title}}</div>
