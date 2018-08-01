@@ -8,7 +8,8 @@
     
     <div class="now-playing" v-if="currentSong !== null">
       <div class="album-art">
-        <img :src="currentSong.img" />
+        <img class="album-main" :src="currentSong.img" />
+        <img class="fallback" :src="~assets/logosquare.jpg" />
       </div>
       <div class="song-info">
         <div class="song-title">{{currentSong.title}}</div>
@@ -189,11 +190,26 @@ export default {
   width: 80px;
   height: 80px;
   margin-right: 16px;
+  position: relative;
   
   img {
     width: 80px;
     height: 80px;
-    -webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, 0.1)))
+    max-width: 80px;
+    min-width: 80px;
+    max-height: 80px;
+    min-height: 80px;
+    -webkit-box-reflect: below 1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, 0.1)));
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .album-main {
+    z-index: 3;
+  }
+  .fallback {
+    z-index: 2;
   }
 }
 
