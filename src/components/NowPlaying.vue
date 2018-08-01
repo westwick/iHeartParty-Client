@@ -62,10 +62,14 @@ export default {
   },
   watch: {
     currentSong: function () {
+      console.log('song changed');
       this.startTimer = false;
       setTimeout(() => {
         this.startTimer = true;
       }, 100);
+    },
+    startTimer: function () {
+      console.log('startTimer changed');
     }
   },
   methods: {
