@@ -58,7 +58,8 @@ export default new Vuex.Store({
         album: track.albumname,
         img: track.imagePath,
         addedBy: track.addedBy,
-        votes: track.votes
+        votes: track.votes,
+        duration: track.duration
       }
     },
     setPlaylist(state, playlist) {

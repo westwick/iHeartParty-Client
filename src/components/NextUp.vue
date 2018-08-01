@@ -11,7 +11,10 @@
             <span v-if="track.votes.score > 0">+</span>
             {{ track.votes.score }}
           </div>
-          <div class="next-title">{{ track.title }}</div>
+          <div class="next-title">
+            {{ track.title }}
+            <span class="next-duration"> ({{ getFormattedTrackLength(track.duration) }})</span>
+          </div>
           <div class="next-artist">{{ track.artistName }} &middot; {{track.albumName}}</div>
           <div class="next-up-rater">
             <div class="rater vote-down" @click="downvoteTrack(track.id)">
@@ -31,6 +34,7 @@
 
 <script>
 import { getNick } from '../services/auth';
+import * as moment from 'moment';
 
 export default {
   name: 'NextUp',
@@ -61,6 +65,9 @@ export default {
         }
       });
       return vote;
+    },
+    getFormattedTrackLength(duration) {
+      return moment('2020-04-20').startOf('day').seconds(duration).format('m:ss');
     }
   }
 }
