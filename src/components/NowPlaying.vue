@@ -49,7 +49,7 @@ export default {
   components: { VueCountdown },
   data() {
     return {
-      startTimer: false,
+      startTimer: true,
       soundMuted: false,
       streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg?"  + this.makeid()
        : "http://api.iheart.party:8000/stream.ogg?" + this.makeid()
