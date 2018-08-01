@@ -15,7 +15,7 @@
             {{ track.title }}
             <span class="next-duration"> ({{ getFormattedTrackLength(track.duration) }})</span>
           </div>
-          <div class="next-artist">{{ track.artistName }} &middot; {{track.albumName}}</div>
+          <div class="next-artist">{{ track.artistName }} <span v-if="track.albumName">&middot; {{track.albumName}}</span></div>
           <div class="next-up-rater">
             <div class="rater vote-down" @click="downvoteTrack(track.id)">
               <i class="far fa-thumbs-down" :class="{downvoted: didUserDownvoteTrack(track)}"></i>

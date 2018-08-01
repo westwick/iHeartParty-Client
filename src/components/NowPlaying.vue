@@ -64,15 +64,11 @@ export default {
   },
   watch: {
     currentSong: function (song) {
-      console.log('song changed', song);
       this.startTimer = false;
       this.timeLeft = song.duration;
       setTimeout(() => {
         this.startTimer = true;
       }, 100);
-    },
-    startTimer: function (val) {
-      console.log('startTimer changed', val);
     }
   },
   methods: {
