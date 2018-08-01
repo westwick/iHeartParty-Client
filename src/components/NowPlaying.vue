@@ -1,18 +1,18 @@
 <template>
-  <div class="now-playing-wrapper" id="vz" :class="{hassong: $store.state.currentSong !== null}">
+  <div class="now-playing-wrapper" id="vz" :class="{hassong: currentSong !== null}">
 
     <audio controls="" autoplay="true" preload="none" id="player" ref="audio"> 
       <source :src="streamUrl" type="audio/mp4">
       <p>Your browser doesn't support HTML audio. Sorry.</p>
     </audio>
     
-    <div class="now-playing" v-if="$store.state.currentSong !== null">
+    <div class="now-playing" v-if="currentSong !== null">
       <div class="album-art">
-        <img :src="$store.state.currentSong.img" />
+        <img :src="currentSong.img" />
       </div>
       <div class="song-info">
-        <div class="song-title">{{$store.state.currentSong.title}}</div>
-        <div class="song-artist">{{$store.state.currentSong.artist}}</div>
+        <div class="song-title">{{currentSong.title}}</div>
+        <div class="song-artist">{{currentSong.artist}}</div>
       </div>
       <div class="volume-control" :class="{muted: soundMuted}" @click="toggleSound()">
         <i class="fas fa-volume-up"></i>
@@ -20,14 +20,19 @@
     </div>
     <div v-else class="no-song-playing"> No Song Playing </div>
     <div class="song-meta">
-      <p v-if="$store.state.currentSong !== null">
-        Song added by {{$store.state.currentSong.addedBy.name}}
+      <p v-if="currentSong !== null">
+        Song added by {{currentSong.addedBy.name}}
         <span class="vote-to-skip">
           <span class="song-timeleft">
-            <vue-countdown :seconds="$store.state.currentSong.duration" :start="true"><vue-countdown>
+            -<vue-countdown 
+               :seconds="currentSong.duration - 500"
+               :message="'preparing next song'"
+               :time-expire="handleTimeExpire"
+               :start="startTimer">
+             <vue-countdown>
           </span>
-          <span v-if="$store.state.currentSong.votes.down > 5">Track skipped, starting next song...</span>
-          <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{$store.state.currentSong.votes.down}} votes)
+          <span v-if="currentSong.votes.down > 5">Track skipped, starting next song...</span>
+          <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{currentSong.votes.down}} votes)
         </span>
       </p>
       <p v-else>No Track Data</p>
@@ -37,15 +42,30 @@
 
 <script>
 import VueCountdown from '@dmaksimovic/vue-countdown';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'NowPlaying',
   components: { VueCountdown },
   data() {
     return {
+      startTimer: false,
       soundMuted: false,
       streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg?"  + this.makeid()
        : "http://api.iheart.party:8000/stream.ogg?" + this.makeid()
+    }
+  },
+  computed: {
+    ...mapGetters({
+      currentSong: 'getCurrentSong'
+    })
+  },
+  watch: {
+    currentSong: function () {
+      this.startTimer = false;
+      setTimeout(() => {
+        this.startTimer = true;
+      }, 100);
     }
   },
   methods: {
@@ -55,6 +75,9 @@ export default {
     },
     voteToSkip() {
       this.$store.dispatch('voteToSkip');
+    },
+    handleTimeExpire() {
+      this.startTimer = false;
     },
     makeid() {
       let text = '';
@@ -145,6 +168,11 @@ export default {
       text-decoration: underline;
     }
   }
+}
+
+.song-timeleft {
+  display: inline-block;
+  margin-right: 16px;
 }
 
 .album-art {

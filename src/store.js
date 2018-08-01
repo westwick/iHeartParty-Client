@@ -18,6 +18,9 @@ export default new Vuex.Store({
     currentSong: null,
     nextUp: []
   },
+  getters: {
+    getCurrentSong: state => state.currentSong
+  },
   mutations: {
     setNick(state, nickname) {
       state.user = {nickname};
