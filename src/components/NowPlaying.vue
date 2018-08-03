@@ -63,7 +63,7 @@ export default {
     })
   },
   watch: {
-    currentSong: function (song) {
+    currentSong: (song) => {
       this.startTimer = false;
       setTimeout(() => {
         console.log('setting countdown duration', song.duration);
