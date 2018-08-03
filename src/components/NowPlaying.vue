@@ -25,7 +25,7 @@
         Song added by {{currentSong.addedBy.name}}
         <span class="vote-to-skip">
           <span class="song-timeleft">
-            <countdown :time="timeLeft">
+            <countdown :time="timeLeft" ref="countdown">
               <template slot-scope="props">{{ props.minutes }}:{{ props.seconds }}</template>
             </countdown>
           </span>
