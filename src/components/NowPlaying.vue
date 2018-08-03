@@ -25,9 +25,9 @@
         Song added by {{currentSong.addedBy.name}}
         <span class="vote-to-skip">
           <span class="song-timeleft">
-            <countdown :time="timeLeft" ref="countdown">
+            <vue-countdown :time="timeLeft" ref="countdown">
               <template slot-scope="props">{{ props.minutes }}:{{ props.seconds }}</template>
-            </countdown>
+            </vue-countdown>
           </span>
           <span v-if="currentSong.votes.down > 5">Track skipped, starting next song...</span>
           <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{currentSong.votes.down}} votes)

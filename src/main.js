@@ -5,6 +5,9 @@ import store from './store'
 import './registerServiceWorker'
 import axios from 'axios'
 import VueSocketio from 'vue-socket.io';
+import {version} from '../../../package.json';
+
+console.log('iHeartParty v' + version);
 
 if (window.location.href.includes("localhost")) {
   Vue.use(VueSocketio, 'http://localhost:9090/rooms/1/meta');
