@@ -61,6 +61,7 @@ export default {
   watch: {
     currentSong(song) {
       console.log('song change, stopping timer');
+      if (!this.$refs.countdown) return;
       this.$refs.countdown.stop();
       setTimeout(() => {
         console.log('setting timer to ' + song.duration * 1000);
