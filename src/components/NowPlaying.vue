@@ -25,12 +25,9 @@
         Song added by {{currentSong.addedBy.name}}
         <span class="vote-to-skip">
           <span class="song-timeleft">
-            -<vue-countdown 
-               :seconds="timeLeft"
-               :message="'preparing next song'"
-               :time-expire="handleTimeExpire"
-               :start="startTimer">
-             </vue-countdown>
+            <countdown :time="timeLeft">
+              <template slot-scope="props">{{ props.minutes }}:{{ props.seconds }}</template>
+            </countdown>
           </span>
           <span v-if="currentSong.votes.down > 5">Track skipped, starting next song...</span>
           <a v-else href="#" @click.prevent="voteToSkip()">skip track</a> ({{currentSong.votes.down}} votes)
@@ -42,7 +39,7 @@
 </template>
 
 <script>
-import VueCountdown from '@dmaksimovic/vue-countdown';
+import VueCountdown from '@xkeshi/vue-countdown';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -50,7 +47,6 @@ export default {
   components: { VueCountdown },
   data() {
     return {
-      startTimer: true,
       timeLeft: 30,
       soundMuted: false,
       streamUrl: window.location.href.includes("localhost") ? "http://localhost:8000/stream.ogg?"  + this.makeid()
@@ -64,18 +60,16 @@ export default {
   },
   watch: {
     currentSong(song) {
-      console.log(song);
-      this.startTimer = false;
-      this.timeLeft = song.duration;
-      this.startTimer = true;
-      // setTimeout(() => {
-      //   console.log('setting countdown duration', song.duration);
-      //   this.timeLeft = song.duration;
-      // }, 200);
-      // setTimeout(() => {
-      //   console.log('starting song countdown', this.timeLeft);
-      //   this.startTimer = true;
-      // }, 500);
+      console.log('song change, stopping timer');
+      this.$refs.countdown.stop();
+      setTimeout(() => {
+        console.log('setting timer to ' + song.duration * 1000);
+        this.timeLeft = song.duration * 1000;
+      }, 100);
+      setTimeout(() => {
+        console.log('starting timer', this.timeLeft);
+        this.$refs.countdown.start();
+      }, 400);
     }
   },
   methods: {
