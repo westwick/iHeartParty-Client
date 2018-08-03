@@ -5,7 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import axios from 'axios'
 import VueSocketio from 'vue-socket.io';
-import {version} from '../../../package.json';
+import {version} from '../package.json';
 
 console.log('iHeartParty v' + version);
 
