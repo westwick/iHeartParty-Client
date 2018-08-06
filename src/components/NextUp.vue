@@ -67,6 +67,7 @@ export default {
       return vote;
     },
     getFormattedTrackLength(duration) {
+      if (!duration) return '0:00';
       return moment('2020-04-20').startOf('day').seconds(duration).format('m:ss');
     }
   }
