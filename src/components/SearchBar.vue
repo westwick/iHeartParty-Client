@@ -74,7 +74,7 @@ export default {
       });
     }, 500),
     submitLink(e) {
-      if (e.keyCode === 13 && /https?\:\/\/youtu\.?be/.test(this.searchTerm)) {
+      if (e.keyCode === 13 && /https?\:\/\/(w+?\.|m\.)?youtu\.?be/.test(this.searchTerm)) {
         this.$store.commit('startSearch');
         addYoutubeTrack(this.searchTerm).then(resp => {
           this.$store.commit('endSearch', []);
