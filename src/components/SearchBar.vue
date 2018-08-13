@@ -16,7 +16,7 @@
 
 <script>
 import * as _ from 'lodash';
-import { addYoutubeTrack } from '../services/streamService';
+import { addYoutubeTrack, addRawTrack } from '../services/streamService';
 
 export default {
   name: 'SearchBar',
@@ -37,6 +37,7 @@ export default {
         this.isClearing = false;
       } else {
         this.$store.commit('youtubeSuccess', false);
+        this.$store.commit('rawSuccess', false);
         this.$store.commit('searchDirty', true);
         this.$store.commit('openSearch');
         if (!/http/.test(this.searchTerm)) {
@@ -73,11 +74,17 @@ export default {
       });
     }, 500),
     submitLink(e) {
-      if (e.keyCode === 13 && /http/.test(this.searchTerm)) {
+      if (e.keyCode === 13 && /https?\:\/\/youtu\.?be/.test(this.searchTerm)) {
         this.$store.commit('startSearch');
         addYoutubeTrack(this.searchTerm).then(resp => {
           this.$store.commit('endSearch', []);
           this.$store.commit('youtubeSuccess', true);
+        });
+      } else if (e.keyCode === 13 && /https?/.test(this.searchTerm)) {
+        this.$store.commit('startSearch');
+        addRawTrack(this.searchTerm).then(resp => {
+          this.$store.commit('endSearch', []);
+          this.$store.commit('rawSuccess', true);
         });
       }
     },

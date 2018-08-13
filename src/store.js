@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     youtubeSuccess: false,
+    rawSuccess: false,
     searching: false,
     showSearchResults: false,
     searchDirty: false,
