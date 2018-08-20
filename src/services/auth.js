@@ -21,3 +21,7 @@ export function setNick(nick) {
 export function getNick() {
   return localStorage.getItem('ihm_nick');
 }
+
+export function getPass() {
+  return localStorage.getItem('ihm_pass');
+}
