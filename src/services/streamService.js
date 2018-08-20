@@ -40,3 +40,13 @@ export function addYoutubeTrack(url) {
   });
 }
 
+export function addRawTrack(url) {
+  return axios.post(apiRoot + '/rooms/1/vote', {
+    type: 'raw',
+    id: url,
+    user: getNick(),
+    pw: getPass(),
+    avatar: 'whatever',
+    up: true
+  });
+}

@@ -4,7 +4,10 @@
     <i class="far fa-times-circle close-btn" @click="closeSearch()"></i>
     <p v-if="$store.state.searching">Searching...</p>
     <p v-if="$store.state.youtubeSuccess" class="no-results">
-      Your youtube track was added!
+      Your YouTube track was added!
+    </p>
+    <p v-if="$store.state.rawSuccess" class="no-results">
+      Your direct link was added!
     </p>
     <p v-if="!$store.state.searching && !$store.state.searchDirty && $store.state.searchResults.length === 0 && !$store.state.youtubeSuccess" class="no-results">
       No results found.
