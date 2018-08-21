@@ -54,6 +54,7 @@ export default {
         headers: this.headers,
         params: {
           keywords: this.searchTerm,
+          maxRows: 25,
           track: true,
           artist: false,
           bundle: false,
