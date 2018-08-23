@@ -38,11 +38,6 @@ import * as moment from 'moment';
 
 export default {
   name: 'NextUp',
-  data() {
-    return {
-      nickname: getNick()
-    }
-  },
   methods: {
     upvoteTrack(id) {
       this.$store.dispatch('upvoteTrack', id)
@@ -57,7 +52,7 @@ export default {
       return this.checkVotesByUser(track) > 0;
     },
     checkVotesByUser(track) {
-      const username = this.nickname;
+      const username = this.$store.state.user.nickname;
       let vote = 0;
       Object.keys(track.userVotes).forEach(user => {
         if (user === username) {
