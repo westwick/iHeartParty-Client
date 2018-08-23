@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Start from './views/Start.vue'
 import Main from './views/Main.vue'
-import Joiner from './views/Joiner.vue'
-import { requireNick } from './services/auth';
+import Approval from './views/Approval.vue'
+import Callback from './views/Callback.vue'
+import { requireAuth } from './services/auth';
 
 Vue.use(Router)
 
@@ -16,16 +17,20 @@ export default new Router({
       component: Start
     },
     {
-      path: '/join',
-      name: 'joiner',
-      component: Joiner,
-      beforeEnter: requireNick 
+      path: '/approval',
+      name: 'approval',
+      component: Approval
+    },
+    {
+      path: '/callback',
+      name: 'callback',
+      component: Callback,
     },
     {
       path: '/',
       name: 'main',
       component: Main,
-      beforeEnter: requireNick 
+      beforeEnter: requireAuth
     },
   ]
 })

@@ -73,6 +73,9 @@ export default new Vuex.Store({
     },
     youtubeSuccess(state, success) {
       state.youtubeSuccess = success;
+    },
+    rawSuccess(state, success) {
+      state.rawSuccess = success;
     }
   },
   actions: {

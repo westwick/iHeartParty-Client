@@ -1,5 +1,9 @@
-export function requireNick(to, from, next) {
-  if (!isNickSet()) {
+import store from '../store'
+
+export function requireAuth(to, from, next) {
+  const expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+  const isAuthenticated = new Date().getTime() < expiresAt;
+  if (!isAuthenticated) {
     next({
       path: '/start',
       query: { redirect: to.fullPath }
@@ -9,19 +13,6 @@ export function requireNick(to, from, next) {
   }
 }
 
-export function isNickSet() {
-  const nick = localStorage.getItem('ihm_nick');
-  return !!nick;
-}
-
-export function setNick(nick) {
-  localStorage.setItem('ihm_nick', nick);
-}
-
 export function getNick() {
-  return localStorage.getItem('ihm_nick');
-}
-
-export function getPass() {
-  return localStorage.getItem('ihm_pass');
+  return store.state.user.nickname;
 }

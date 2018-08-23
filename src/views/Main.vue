@@ -17,7 +17,13 @@ import SearchBar from '../components/SearchBar'
 export default {
   name: 'searchbar',
   components: { NowPlaying, NextUp, SearchBar, SearchResults },
-  sockets:{
+  props: ['auth'],
+  mounted() {
+    this.auth.auth0.client.userInfo(this.auth.getAccessToken(), (err, profile) => {
+      this.$store.commit('setNick', profile.nickname);
+    });
+  },
+  sockets: {
     connect: function(){
       // console.log('socket connected')
     },

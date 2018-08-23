@@ -8,25 +8,27 @@ if (window.location.href.includes("localhost")) {
   apiRoot = 'http://api.iheart.party';
 }
 
+function getToken() {
+  return localStorage.getItem('access_token');
+}
+
 export function sendTrack (trackId) {
   return axios.post(apiRoot + '/rooms/1/vote', {
     type: 'ihr',
     id: trackId,
-    pw: getPass(),
     user: getNick(),
     avatar: 'whatever',
     up: true
-  });
+  }, { headers: { Authorization: `Bearer ${getToken()}` }});
 }
 
 export function voteTrack (trackId, up) {
   return axios.post(apiRoot + '/rooms/1/vote', {
     id: trackId,
     user: getNick(),
-    pw: getPass(),
     avatar: 'whatever',
     up
-  });
+  }, { headers: { Authorization: `Bearer ${getToken()}` }});
 }
 
 export function addYoutubeTrack(url) {
@@ -34,10 +36,9 @@ export function addYoutubeTrack(url) {
     type: 'yt',
     id: url,
     user: getNick(),
-    pw: getPass(),
     avatar: 'whatever',
     up: true
-  });
+  }, { headers: { Authorization: `Bearer ${getToken()}` }});
 }
 
 export function addRawTrack(url) {
@@ -45,8 +46,7 @@ export function addRawTrack(url) {
     type: 'raw',
     id: url,
     user: getNick(),
-    pw: getPass(),
     avatar: 'whatever',
     up: true
-  });
+  }, { headers: { Authorization: `Bearer ${getToken()}` }});
 }
