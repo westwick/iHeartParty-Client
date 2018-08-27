@@ -9,6 +9,16 @@ import {version} from '../package.json';
 
 console.log('iHeartParty v' + version);
 
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  if (error.response.status === 401) {
+    console.log('session expired');
+    window.location = '/start';
+  }
+  return Promise.reject(error);
+});
+
 if (window.location.href.includes("localhost")) {
   Vue.use(VueSocketio, 'http://localhost:9090/rooms/1/meta');
 } else {
