@@ -14,10 +14,11 @@ import NowPlaying from '../components/NowPlaying'
 import NextUp from '../components/NextUp'
 import SearchResults from '../components/SearchResults'
 import SearchBar from '../components/SearchBar'
+import PlaylistInfo from '../components/PlaylistInfo'
 
 export default {
   name: 'searchbar',
-  components: { NowPlaying, NextUp, SearchBar, SearchResults },
+  components: { NowPlaying, NextUp, SearchBar, SearchResults, PlaylistInfo },
   props: ['auth'],
   mounted() {
     this.auth.auth0.client.userInfo(this.auth.getAccessToken(), (err, profile) => {
