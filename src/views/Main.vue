@@ -1,6 +1,7 @@
 <template>
   <div class="mainapp">
     <now-playing></now-playing>
+    <playlist-info></playlist-info>
     <next-up></next-up>
 
     <search-results :class="{expanded: $store.state.showSearchResults}" v-on:searchclosed="clearSearch"></search-results>

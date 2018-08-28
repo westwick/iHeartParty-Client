@@ -20,7 +20,9 @@ export default new Vuex.Store({
     nextUp: []
   },
   getters: {
-    getCurrentSong: state => state.currentSong
+    getCurrentSong: state => state.currentSong,
+    getTotalSongs: state => state.nextUp.length,
+    getTotalLength: state => _.sumBy(state.nextUp, 'duration')
   },
   mutations: {
     setNick(state, nickname) {
