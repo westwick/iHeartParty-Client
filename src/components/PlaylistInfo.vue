@@ -44,7 +44,7 @@ export default {
 }
 
 span.divider {
-  color: #eee;
-  padding: 0 4px;
+  color: #ccc;
+  padding: 0 16px;
 }
 </style>
