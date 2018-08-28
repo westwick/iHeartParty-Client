@@ -6,6 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import * as moment from 'moment';
 
 export default {
   name: 'PlaylistInfo',
