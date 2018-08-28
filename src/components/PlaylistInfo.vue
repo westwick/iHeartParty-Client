@@ -40,11 +40,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #eee;
+  background: #eee;
+  color: #666;
 }
 
 span.divider {
-  color: #ccc;
+  color: #bbb;
   padding: 0 16px;
 }
 </style>
