@@ -90,9 +90,10 @@ export default {
   overflow-y: scroll;
   // now-playing = 112px
   // song-meta   = 40px
+  // pl-info     = 30px
   // search-bar  = 68px
-  // total       = 220px
-  height: calc(100vh - 220px);
+  // total       = 250px
+  height: calc(100vh - 250px);
 
 
   h2 {

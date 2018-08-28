@@ -1,6 +1,11 @@
 <template>
   <div class="playlist-info-wrapper">
-    <p>{{ totalSongs }} tracks | {{ getFormattedDuration(totalLength) }} playlist length | ending approx {{ endTime() }}</p>
+    <p class="playlist-info">
+      {{ totalSongs }} tracks
+      <span class="divider">|</span>
+      {{ getFormattedDuration(totalLength) }} playlist length
+      <span class="divider">|</span>
+      ending approx {{ endTime() }}</p>
   </div>
 </template>
 
@@ -29,5 +34,17 @@ export default {
 </script>
 
 <style lang="scss">
+.playlist-info {
+  font-size: 13px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #eee;
+}
 
+span.divider {
+  color: #eee;
+  padding: 0 4px;
+}
 </style>
