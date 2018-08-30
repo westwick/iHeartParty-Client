@@ -11,6 +11,11 @@
             <span v-if="track.votes.score > 0">+</span>
             {{ track.votes.score }}
           </div>
+          <div class="track-meta">
+            <p>Added by: {{ track.addedBy.name }}</p>
+            <p v-if="getVoters(track).up.length">Upvotes: {{ getVoters(track).up.join(', ') }}</p>
+            <p v-if="getVoters(track).down.length">Downvotes: {{ getVoters(track).down.join(', ') }}</p>
+          </div>
           <div class="next-title">
             {{ track.title }}
             <span class="next-duration"> ({{ getFormattedTrackLength(track.duration) }})</span>
@@ -50,6 +55,18 @@ export default {
     },
     didUserUpvoteTrack(track) {
       return this.checkVotesByUser(track) > 0;
+    },
+    getVoters(track) {
+      const upvoters = [];
+      const downvoters = [];
+      for (const key in track.userVotes) {
+        if (track.userVotes[key] > 0) {
+          upvoters.push(key);
+        } else if (track.userVotes[key] < 0) {
+          downvoters.push(key);
+        }
+      };
+      return { up: upvoters, down: downvoters };
     },
     checkVotesByUser(track) {
       const username = this.$store.state.user.nickname;
@@ -117,7 +134,25 @@ export default {
   padding: 8px 64px 8px 48px;
   position: relative;
 
+  .track-meta {
+    background: rgba(255, 255, 255, .8);
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 48px;
+    width: calc(100% - 106px);
+    height: 100%;
+    z-index: 3;
+    font-size: 12px;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    color: #000;
+    font-weight: 500;
+  }
+
   .track-score {
+    cursor: help;
     position: absolute;
     left: 0;
     top: 0;
@@ -131,6 +166,11 @@ export default {
     }
     &.neg {
       color: #c51f19;
+    }
+    &:hover {
+      & + .track-meta {
+        display: flex;
+      }
     }
   }
 }
